@@ -1,0 +1,107 @@
+<div class="row">
+<div class=" col-md-8 col-xs-12">
+<div class="card card-primary">
+    <div class="card-header">
+    <h3 class="card-title">Formulir Periode Kegiatan Jabatan Fungsional</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form role="form">
+    <div class="card-body">
+        <div class="form-group row">
+            <label for="text" class="col-4 col-form-label">periode_mulai</label> 
+            <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                </div> 
+                <input id="text" name="text" type="text" class="form-control">
+            </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="periode_akhir" class="col-4 col-form-label">Periode Akhir</label> 
+            <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                </div> 
+                <input id="periode_akhir" name="periode_akhir" type="text" class="form-control">
+            </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="text1" class="col-4 col-form-label">Atasan</label> 
+            <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fa fa-user"></i>
+                </div>
+                </div> 
+                <input id="text1" name="text1" type="text" class="form-control">
+            </div>
+            </div>
+        </div> 
+        <div class="form-group row">
+            <label for="text1" class="col-4 col-form-label">Pejabat Pengusul</label> 
+            <div class="col-8">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fa fa-user"></i>
+                </div>
+                </div> 
+                <input id="text1" name="text1" type="text" class="form-control">
+            </div>
+            </div>
+        </div> 
+        
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+        <button type="submit" class="btn btn-primary float-right">Simpan Periode Dupak</button>
+    </div>
+    </form>
+</div>
+<!-- /.card -->
+</div>
+</div>
+
+<div class="row">
+<div class=" col-md-8 col-xs-12">
+<div class="card card-primary">
+    <div class="card-header">
+    <h3 class="card-title">Daftar Kegiatan</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form role="form">
+    <div class="card-body">
+        
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    </form>
+</div>
+<!-- /.card -->
+</div>
+</div>
+
+<?php
+$this->inlineScript()->captureStart();
+echo <<<JS
+    $("#nav-link-dupak-usulan").addClass("active");
+    $('select').change(function(){
+        location.href = $(this).val();
+    });
+JS;
+$this->inlineScript()->captureEnd();
