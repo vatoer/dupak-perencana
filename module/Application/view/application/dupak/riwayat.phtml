@@ -1,1 +1,84 @@
-RIWAYAT
+<?php 
+//use Application\Entity\RefButirKegiatan;
+
+$tr = "";
+foreach ($this->usulan as $k ) {
+   // echo $k->getIdJenjangJabatanFungsional()->getNama() ."<br/>";
+   // echo $k->getIdSubUnsur()->getIdUnsur()->getNama() ."<br/>";
+   // echo $k->getIdSubUnsur()->getNama() ."<br/>";
+   // echo $k->getKegiatan() ."<br/>";
+
+   $tr .= "<tr>".
+        "<td>$nip</td>". 
+        "<td>$nama</td>". 
+        "<td>$unitkerja</td>".
+        "<td>$usulanAk</td>".
+        "<td>$status</td>".
+        "<td>$nilaiPak</td></tr>";
+}
+
+function toDataTable($tr){
+    $datatable = "<table class='Datatable table display' id='dtRiwayatDupak'>
+    <thead>
+    <tr>
+        <th>NIP</th>
+        <th>Nama</th>
+        <th>Unit Kerja</th>
+        <th>Usulan AK</th>
+        <th>status</th>
+        <th>Hasil PAK/HAPAK</th>
+    </tr>
+    </thead>
+    <tbody>
+    $tr
+    </tbody>
+    </table>";
+    return $datatable;
+}
+
+?>
+
+
+<div class="row">
+<div class=" col-12">
+<div class="card card-primary">
+    <div class="card-header">
+    <h3 class="card-title">Daftar Usulan</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form role="form">
+    <div class="card-body">
+        <?=toDataTable($tr);?>
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+        
+    </div>
+    </form>
+</div>
+<!-- /.card -->
+</div>
+</div>
+<!-- /.row -->
+
+<?php
+$this->inlineScript()->captureStart();
+echo <<<JS
+
+    $("#nav-item-dupak").addClass("menu-open");
+    $("#nav-item-dupak > a").addClass("active");
+    $("#nav-item-dupak-riwayat > a").addClass("active");
+
+    $('select').change(function(){
+        //location.href = $(this).val();
+    });
+
+    $("#dtRiwayatDupak").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+
+JS;
+$this->inlineScript()->captureEnd();

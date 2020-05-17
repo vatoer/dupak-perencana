@@ -30,20 +30,32 @@ class DupakController extends AbstractActionController
         return $vm;
     }
     
-    public function persetujuanAction(){
-        
+    public function persetujuanAtasanAction(){
+        $vm = new ViewModel();
+        return $vm;
     }
 
-    public function pemeriksaanAction(){
-        
+    public function persetujuanUnitAction(){
+        $vm = new ViewModel();
+        return $vm;
+    }
+
+    public function pemeriksaanDokumenAction(){
+        $vm = new ViewModel();
+        return $vm;
     }
 
     public function penilaianAction(){
-        
+        $vm = new ViewModel();
+        return $vm;
     }
 
     public function riwayatAction(){
+
+        $usulan = [];
+
         $vm = new ViewModel();
+        $vm->setVariable('usulan',$usulan);
         return $vm;
     }
 }
