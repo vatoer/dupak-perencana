@@ -1,0 +1,85 @@
+<?php 
+//use Application\Entity\Pegawai;
+$tr = "";
+foreach ($this->pegawai as $k ) {
+   // echo $k->getIdJenjangJabatanFungsional()->getNama() ."<br/>";
+   // echo $k->getIdSubUnsur()->getIdUnsur()->getNama() ."<br/>";
+   // echo $k->getIdSubUnsur()->getNama() ."<br/>";
+   // echo $k->getKegiatan() ."<br/>";
+   
+   $nip = $k->getNip();
+   $nama = $k->getNamaDepan();
+   $unker = $k->getOrganisasi()->getNama();
+   $jafung = $k->getJabatanFungsional()->getNama();
+
+
+   $tr .= "<tr>".
+        "<td>$nip</td>". 
+        "<td>$nama</td>". 
+        "<td>$unker</td>".
+        "<td>$jafung</td></tr>";
+}
+
+function toDataTable($tr){
+    $datatable = "<table class='Datatable table display' id='dtPegawai'>
+    <thead>
+    <tr>
+        <th>NIP</th>
+        <th>Nama</th>
+        <th>Unker</th>
+        <th>Jenjang</th>
+    </tr>
+    </thead>
+    <tbody>
+    $tr
+    </tbody>
+    </table>";
+    return $datatable;
+}
+
+?>
+
+<div class="row">
+<div class=" col-12">
+<div class="card card-primary">
+    <div class="card-header">
+    <h3 class="card-title">Daftar Pegawai</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form role="form">
+    <div class="card-body">
+        <?=toDataTable($tr);?>
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    </form>
+</div>
+<!-- /.card -->
+</div>
+</div>
+
+<?php
+$this->inlineScript()->captureStart();
+echo <<<JS
+
+    $('.select2').select2();
+
+    $("#nav-item-data-referensi").addClass("menu-open");
+    $("#nav-item-data-referensi > a").addClass("active");
+    $("#nav-item-ref-pegawai > a").addClass("active");
+
+    $('select').change(function(){
+        //location.href = $(this).val();
+    });
+
+    $("#dtPegawai").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+
+JS;
+$this->inlineScript()->captureEnd();
