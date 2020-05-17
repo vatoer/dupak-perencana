@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TrUsulan
  *
  * @ORM\Table(name="tr_usulan")
- * @ORM\Entity(repositoryClass="App\Repository\TrUsulanRepository")
+ * @ORM\Entity(repositoryClass="Application\Repository\TrUsulanRepository")
  */
 class TrUsulan
 {

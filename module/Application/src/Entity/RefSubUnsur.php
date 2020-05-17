@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * RefSubUnsur
  *
  * @ORM\Table(name="ref_sub_unsur", indexes={@ORM\Index(name="REL_to_ref_unsur", columns={"id_unsur"})})
- * @ORM\Entity(repositoryClass="App\Repository\RefSubUnsurRepository")
+ * @ORM\Entity(repositoryClass="Application\Repository\RefSubUnsurRepository")
  */
 class RefSubUnsur
 {

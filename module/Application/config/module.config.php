@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Application;
 
+use Application\Controller\ReferenceController;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
@@ -59,6 +60,16 @@ return [
                     ],
                 ],
             ],
+            'reference' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/reference[/:action[/:a[/:b[/:c]]]]',
+                    'defaults' => [
+                        'controller' => Controller\ReferenceController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
@@ -66,6 +77,7 @@ return [
           Controller\IndexController::class => InvokableFactory::class,
           Controller\DupakController::class => InvokableFactory::class,
           Controller\PakController::class => InvokableFactory::class,
+          Controller\ReferenceController::class => Factory\ReferenceControllerFactory::class,
         ],
     ],
     'view_manager' => [

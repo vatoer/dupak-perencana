@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * TrJabatanFungsionalPegawai
  *
  * @ORM\Table(name="tr_jabatan_fungsional_pegawai", indexes={@ORM\Index(name="REL_tr_j_f_p_to_p", columns={"pegawai_id"}), @ORM\Index(name="REL_tr_j_f_p_to_tr_f_j_f", columns={"formasi_id"})})
- * @ORM\Entity(repositoryClass="App\Repository\TrJabatanFungsionalPegawaiRepository")
+ * @ORM\Entity(repositoryClass="Application\Repository\TrJabatanFungsionalPegawaiRepository")
  */
 class TrJabatanFungsionalPegawai
 {

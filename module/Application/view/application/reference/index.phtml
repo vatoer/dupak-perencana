@@ -1,0 +1,10 @@
+<?php 
+//use Application\Entity\RefButirKegiatan;
+foreach ($this->kegiatan as $k ) {
+    echo $k->getIdJenjangJabatanFungsional()->getNama() ."<br/>";
+    echo $k->getIdSubUnsur()->getIdUnsur()->getNama() ."<br/>";
+    echo $k->getIdSubUnsur()->getNama() ."<br/>";
+    echo $k->getKegiatan() ."<br/>";
+}
+
+?>

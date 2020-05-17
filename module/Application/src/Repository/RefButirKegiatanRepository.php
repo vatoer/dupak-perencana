@@ -3,7 +3,7 @@
 namespace Application\Repository;
 
 use Application\Entity\RefButirKegiatan;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -12,12 +12,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method RefButirKegiatan[]    findAll()
  * @method RefButirKegiatan[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RefButirKegiatanRepository extends ServiceEntityRepository
+class RefButirKegiatanRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, RefButirKegiatan::class);
-    }
 
     // /**
     //  * @return RefButirKegiatan[] Returns an array of RefButirKegiatan objects

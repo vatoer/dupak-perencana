@@ -3,7 +3,7 @@
 namespace Application\Repository;
 
 use Application\Entity\Pegawai;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * @method Pegawai|null find($id, $lockMode = null, $lockVersion = null)
@@ -11,12 +11,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
  * @method Pegawai[]    findAll()
  * @method Pegawai[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PegawaiRepository extends ServiceEntityRepository
+class PegawaiRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Pegawai::class);
-    }
 
     // /**
     //  * @return Pegawai[] Returns an array of Pegawai objects

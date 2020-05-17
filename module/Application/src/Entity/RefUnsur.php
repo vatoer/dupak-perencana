@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * RefUnsur
  *
  * @ORM\Table(name="ref_unsur")
- * @ORM\Entity(repositoryClass="App\Repository\RefUnsurRepository")
+ * @ORM\Entity(repositoryClass="Application\Repository\RefUnsurRepository")
  */
 class RefUnsur
 {

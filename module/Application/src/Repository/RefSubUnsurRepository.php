@@ -3,7 +3,7 @@
 namespace Application\Repository;
 
 use Application\Entity\RefSubUnsur;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
