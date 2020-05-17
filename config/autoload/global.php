@@ -13,6 +13,11 @@
  */
 return [
     'db' => [
+    'driver' => 'Pdo',
+    'dsn' => 'mysql:dbname=organisasi;host=localhost',
+    'driver_options' => [
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
+      ],
         'adapters' => [
             'Application\Db\OrganisasiAdapter' => [
                 'driver' => 'Pdo',
