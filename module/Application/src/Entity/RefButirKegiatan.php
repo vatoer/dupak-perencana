@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * RefButirKegiatan
  *
- * @ORM\Table(name="ref_butir_kegiatan", indexes={@ORM\Index(name="REL_to_ref_sub_unsur", columns={"id_sub_unsur"}), @ORM\Index(name="REL_to_ref_jenjang_jf", columns={"id_jenjang_jabatan_fungsional"})})
+ * @ORM\Table(name="ref_butir_kegiatan", indexes={@ORM\Index(name="REL_to_ref_satuan_hasil", columns={"id_satuan_hasil"}), @ORM\Index(name="REL_to_ref_sub_unsur", columns={"id_sub_unsur"}), @ORM\Index(name="REL_to_ref_jenjang_jf", columns={"id_jenjang_jabatan_fungsional"})})
  * @ORM\Entity(repositoryClass="Application\Repository\RefButirKegiatanRepository")
  */
 class RefButirKegiatan
@@ -34,13 +34,6 @@ class RefButirKegiatan
      * @ORM\Column(name="kegiatan", type="string", length=1000, nullable=true, options={"default"="NULL"})
      */
     private $kegiatan = 'NULL';
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="id_satuan_hasil", type="integer", nullable=true, options={"default"="NULL"})
-     */
-    private $idSatuanHasil = 'NULL';
 
     /**
      * @var string|null
@@ -81,6 +74,16 @@ class RefButirKegiatan
     private $idJenjangJabatanFungsional;
 
     /**
+     * @var \RefSatuanHasil
+     *
+     * @ORM\ManyToOne(targetEntity="RefSatuanHasil")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_satuan_hasil", referencedColumnName="id")
+     * })
+     */
+    private $idSatuanHasil;
+
+    /**
      * @var \RefSubUnsur
      *
      * @ORM\ManyToOne(targetEntity="RefSubUnsur")
@@ -115,18 +118,6 @@ class RefButirKegiatan
     public function setKegiatan(?string $kegiatan): self
     {
         $this->kegiatan = $kegiatan;
-
-        return $this;
-    }
-
-    public function getIdSatuanHasil(): ?int
-    {
-        return $this->idSatuanHasil;
-    }
-
-    public function setIdSatuanHasil(?int $idSatuanHasil): self
-    {
-        $this->idSatuanHasil = $idSatuanHasil;
 
         return $this;
     }
@@ -191,6 +182,18 @@ class RefButirKegiatan
         return $this;
     }
 
+    public function getIdSatuanHasil(): ?RefSatuanHasil
+    {
+        return $this->idSatuanHasil;
+    }
+
+    public function setIdSatuanHasil(?RefSatuanHasil $idSatuanHasil): self
+    {
+        $this->idSatuanHasil = $idSatuanHasil;
+
+        return $this;
+    }
+
     public function getIdSubUnsur(): ?RefSubUnsur
     {
         return $this->idSubUnsur;
@@ -205,3 +208,4 @@ class RefButirKegiatan
 
 
 }
+

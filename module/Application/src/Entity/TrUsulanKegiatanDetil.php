@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TrUsulanKegiatanDetil
  *
- * @ORM\Table(name="tr_usulan_kegiatan_detil")
+ * @ORM\Table(name="tr_usulan_kegiatan_detil", indexes={@ORM\Index(name="REL_tr_usulan_kegiatan", columns={"id_usulan_kegiatan"})})
  * @ORM\Entity(repositoryClass="Application\Repository\TrUsulanKegiatanDetilRepository")
  */
 class TrUsulanKegiatanDetil
@@ -20,13 +20,6 @@ class TrUsulanKegiatanDetil
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(name="id_usulan_kegiatan", type="integer", nullable=true, options={"default"="NULL"})
-     */
-    private $idUsulanKegiatan = 'NULL';
 
     /**
      * @var \DateTime|null
@@ -98,21 +91,19 @@ class TrUsulanKegiatanDetil
      */
     private $n3Kualitas = 'NULL';
 
+    /**
+     * @var \TrUsulanKegiatan
+     *
+     * @ORM\ManyToOne(targetEntity="TrUsulanKegiatan")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_usulan_kegiatan", referencedColumnName="id")
+     * })
+     */
+    private $idUsulanKegiatan;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdUsulanKegiatan(): ?int
-    {
-        return $this->idUsulanKegiatan;
-    }
-
-    public function setIdUsulanKegiatan(?int $idUsulanKegiatan): self
-    {
-        $this->idUsulanKegiatan = $idUsulanKegiatan;
-
-        return $this;
     }
 
     public function getTanggalMulai(): ?\DateTimeInterface
@@ -231,6 +222,18 @@ class TrUsulanKegiatanDetil
     public function setN3Kualitas(?string $n3Kualitas): self
     {
         $this->n3Kualitas = $n3Kualitas;
+
+        return $this;
+    }
+
+    public function getIdUsulanKegiatan(): ?TrUsulanKegiatan
+    {
+        return $this->idUsulanKegiatan;
+    }
+
+    public function setIdUsulanKegiatan(?TrUsulanKegiatan $idUsulanKegiatan): self
+    {
+        $this->idUsulanKegiatan = $idUsulanKegiatan;
 
         return $this;
     }

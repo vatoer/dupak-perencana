@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Pegawai
  *
- * @ORM\Table(name="pegawai", indexes={@ORM\Index(name="REL_p_to_ref_org", columns={"organisasi_id"})})
+ * @ORM\Table(name="pegawai", indexes={@ORM\Index(name="REL_p_to_ref_org", columns={"organisasi_id"}), @ORM\Index(name="REL_to_jenjang", columns={"jabatan_fungsional_id"})})
  * @ORM\Entity(repositoryClass="Application\Repository\PegawaiRepository")
  */
 class Pegawai
@@ -15,11 +15,11 @@ class Pegawai
     /**
      * @var string
      *
-     * @ORM\Column(name="id", type="string", length=36, nullable=false)
+     * @ORM\Column(name="id", type="string", length=36, nullable=false, options={"default"="'uuid()'"})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $id = '\'uuid()\'';
 
     /**
      * @var string|null
@@ -78,13 +78,6 @@ class Pegawai
     private $isJabatanFungsional = '0';
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="jabatan_fungsional_id", type="string", length=36, nullable=true, options={"default"="NULL"})
-     */
-    private $jabatanFungsionalId = 'NULL';
-
-    /**
      * @var bool|null
      *
      * @ORM\Column(name="is_jabatan_admistrasi", type="boolean", nullable=true)
@@ -129,9 +122,9 @@ class Pegawai
     /**
      * @var \DateTime|null
      *
-     * @ORM\Column(name="meta_dt_update", type="date", nullable=true, options={"default"="current_timestamp()"})
+     * @ORM\Column(name="meta_dt_update", type="date", nullable=true, options={"default"="NULL"})
      */
-    private $metaDtUpdate = 'current_timestamp()';
+    private $metaDtUpdate = 'NULL';
 
     /**
      * @var string|null
@@ -149,6 +142,16 @@ class Pegawai
      * })
      */
     private $organisasi;
+
+    /**
+     * @var \RefJenjangJabatanFungsional
+     *
+     * @ORM\ManyToOne(targetEntity="RefJenjangJabatanFungsional")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="jabatan_fungsional_id", referencedColumnName="id")
+     * })
+     */
+    private $jabatanFungsional;
 
     public function getId(): ?string
     {
@@ -247,18 +250,6 @@ class Pegawai
     public function setIsJabatanFungsional(?bool $isJabatanFungsional): self
     {
         $this->isJabatanFungsional = $isJabatanFungsional;
-
-        return $this;
-    }
-
-    public function getJabatanFungsionalId(): ?string
-    {
-        return $this->jabatanFungsionalId;
-    }
-
-    public function setJabatanFungsionalId(?string $jabatanFungsionalId): self
-    {
-        $this->jabatanFungsionalId = $jabatanFungsionalId;
 
         return $this;
     }
@@ -371,5 +362,18 @@ class Pegawai
         return $this;
     }
 
+    public function getJabatanFungsional(): ?RefJenjangJabatanFungsional
+    {
+        return $this->jabatanFungsional;
+    }
+
+    public function setJabatanFungsional(?RefJenjangJabatanFungsional $jabatanFungsional): self
+    {
+        $this->jabatanFungsional = $jabatanFungsional;
+
+        return $this;
+    }
+
 
 }
+

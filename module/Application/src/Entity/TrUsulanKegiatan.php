@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TrUsulanKegiatan
  *
- * @ORM\Table(name="tr_usulan_kegiatan")
+ * @ORM\Table(name="tr_usulan_kegiatan", indexes={@ORM\Index(name="REL_to_tr_usulan", columns={"id_usulan"})})
  * @ORM\Entity(repositoryClass="Application\Repository\TrUsulanKegiatanRepository")
  */
 class TrUsulanKegiatan
@@ -20,13 +20,6 @@ class TrUsulanKegiatan
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="id_usulan", type="string", length=36, nullable=true, options={"default"="NULL"})
-     */
-    private $idUsulan = 'NULL';
 
     /**
      * @var \DateTime|null
@@ -98,21 +91,19 @@ class TrUsulanKegiatan
      */
     private $n3Kualitas = 'NULL';
 
+    /**
+     * @var \TrUsulan
+     *
+     * @ORM\ManyToOne(targetEntity="TrUsulan")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_usulan", referencedColumnName="id")
+     * })
+     */
+    private $idUsulan;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdUsulan(): ?string
-    {
-        return $this->idUsulan;
-    }
-
-    public function setIdUsulan(?string $idUsulan): self
-    {
-        $this->idUsulan = $idUsulan;
-
-        return $this;
     }
 
     public function getTanggalMulai(): ?\DateTimeInterface
@@ -231,6 +222,18 @@ class TrUsulanKegiatan
     public function setN3Kualitas(?string $n3Kualitas): self
     {
         $this->n3Kualitas = $n3Kualitas;
+
+        return $this;
+    }
+
+    public function getIdUsulan(): ?TrUsulan
+    {
+        return $this->idUsulan;
+    }
+
+    public function setIdUsulan(?TrUsulan $idUsulan): self
+    {
+        $this->idUsulan = $idUsulan;
 
         return $this;
     }

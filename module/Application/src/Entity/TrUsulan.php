@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TrUsulan
  *
- * @ORM\Table(name="tr_usulan")
+ * @ORM\Table(name="tr_usulan", indexes={@ORM\Index(name="REL_atasan_to_pegawai", columns={"id_atasan"}), @ORM\Index(name="REL_pengusul_to_pegawai", columns={"id_pengusul"})})
  * @ORM\Entity(repositoryClass="Application\Repository\TrUsulanRepository")
  */
 class TrUsulan
@@ -27,20 +27,6 @@ class TrUsulan
      * @ORM\Column(name="id_pegawai", type="string", length=36, nullable=true, options={"default"="NULL"})
      */
     private $idPegawai = 'NULL';
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="id_atasan", type="string", length=36, nullable=true, options={"default"="NULL"})
-     */
-    private $idAtasan = 'NULL';
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="id_pengusul", type="string", length=36, nullable=true, options={"default"="NULL"})
-     */
-    private $idPengusul = 'NULL';
 
     /**
      * @var string|null
@@ -217,6 +203,26 @@ class TrUsulan
      */
     private $penilai3Status = 'NULL';
 
+    /**
+     * @var \Pegawai
+     *
+     * @ORM\ManyToOne(targetEntity="Pegawai")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_atasan", referencedColumnName="id")
+     * })
+     */
+    private $idAtasan;
+
+    /**
+     * @var \Pegawai
+     *
+     * @ORM\ManyToOne(targetEntity="Pegawai")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_pengusul", referencedColumnName="id")
+     * })
+     */
+    private $idPengusul;
+
     public function getId(): ?string
     {
         return $this->id;
@@ -230,30 +236,6 @@ class TrUsulan
     public function setIdPegawai(?string $idPegawai): self
     {
         $this->idPegawai = $idPegawai;
-
-        return $this;
-    }
-
-    public function getIdAtasan(): ?string
-    {
-        return $this->idAtasan;
-    }
-
-    public function setIdAtasan(?string $idAtasan): self
-    {
-        $this->idAtasan = $idAtasan;
-
-        return $this;
-    }
-
-    public function getIdPengusul(): ?string
-    {
-        return $this->idPengusul;
-    }
-
-    public function setIdPengusul(?string $idPengusul): self
-    {
-        $this->idPengusul = $idPengusul;
 
         return $this;
     }
@@ -554,6 +536,30 @@ class TrUsulan
     public function setPenilai3Status(?string $penilai3Status): self
     {
         $this->penilai3Status = $penilai3Status;
+
+        return $this;
+    }
+
+    public function getIdAtasan(): ?Pegawai
+    {
+        return $this->idAtasan;
+    }
+
+    public function setIdAtasan(?Pegawai $idAtasan): self
+    {
+        $this->idAtasan = $idAtasan;
+
+        return $this;
+    }
+
+    public function getIdPengusul(): ?Pegawai
+    {
+        return $this->idPengusul;
+    }
+
+    public function setIdPengusul(?Pegawai $idPengusul): self
+    {
+        $this->idPengusul = $idPengusul;
 
         return $this;
     }

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TrDetilPenetapanAngkaKredit
  *
- * @ORM\Table(name="tr_detil_penetapan_angka_kredit")
+ * @ORM\Table(name="tr_detil_penetapan_angka_kredit", indexes={@ORM\Index(name="REL_dpak_to_pak", columns={"id_pak"})})
  * @ORM\Entity(repositoryClass="Application\Repository\TrDetilPenetapanAngkaKreditRepository")
  */
 class TrDetilPenetapanAngkaKredit
@@ -20,13 +20,6 @@ class TrDetilPenetapanAngkaKredit
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="id_pak", type="string", length=36, nullable=true, options={"default"="NULL"})
-     */
-    private $idPak = 'NULL';
 
     /**
      * @var string|null
@@ -63,21 +56,19 @@ class TrDetilPenetapanAngkaKredit
      */
     private $jumlahPakBaru = 'NULL';
 
+    /**
+     * @var \TrPenetapanAngkaKredit
+     *
+     * @ORM\ManyToOne(targetEntity="TrPenetapanAngkaKredit")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_pak", referencedColumnName="id")
+     * })
+     */
+    private $idPak;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdPak(): ?string
-    {
-        return $this->idPak;
-    }
-
-    public function setIdPak(?string $idPak): self
-    {
-        $this->idPak = $idPak;
-
-        return $this;
     }
 
     public function getGroupingNilai(): ?string
@@ -136,6 +127,18 @@ class TrDetilPenetapanAngkaKredit
     public function setJumlahPakBaru(?string $jumlahPakBaru): self
     {
         $this->jumlahPakBaru = $jumlahPakBaru;
+
+        return $this;
+    }
+
+    public function getIdPak(): ?TrPenetapanAngkaKredit
+    {
+        return $this->idPak;
+    }
+
+    public function setIdPak(?TrPenetapanAngkaKredit $idPak): self
+    {
+        $this->idPak = $idPak;
 
         return $this;
     }

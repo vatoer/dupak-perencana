@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TrPenetapanAngkaKredit
  *
- * @ORM\Table(name="tr_penetapan_angka_kredit")
+ * @ORM\Table(name="tr_penetapan_angka_kredit", indexes={@ORM\Index(name="REL_pak_to_tr_usulan", columns={"id_usulan"})})
  * @ORM\Entity(repositoryClass="Application\Repository\TrPenetapanAngkaKreditRepository")
  */
 class TrPenetapanAngkaKredit
@@ -22,18 +22,11 @@ class TrPenetapanAngkaKredit
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="jenis_pak", type="string", length=50, nullable=false)
-     */
-    private $jenisPak;
-
-    /**
      * @var string|null
      *
-     * @ORM\Column(name="id_usulan", type="string", length=50, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(name="jenis_pak", type="string", length=50, nullable=true, options={"default"="'HAPAK'"})
      */
-    private $idUsulan = 'NULL';
+    private $jenisPak = '\'HAPAK\'';
 
     /**
      * @var string|null
@@ -329,6 +322,16 @@ class TrPenetapanAngkaKredit
      */
     private $tahunPendidikan = 'NULL';
 
+    /**
+     * @var \TrUsulan
+     *
+     * @ORM\ManyToOne(targetEntity="TrUsulan")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_usulan", referencedColumnName="id")
+     * })
+     */
+    private $idUsulan;
+
     public function getId(): ?string
     {
         return $this->id;
@@ -339,21 +342,9 @@ class TrPenetapanAngkaKredit
         return $this->jenisPak;
     }
 
-    public function setJenisPak(string $jenisPak): self
+    public function setJenisPak(?string $jenisPak): self
     {
         $this->jenisPak = $jenisPak;
-
-        return $this;
-    }
-
-    public function getIdUsulan(): ?string
-    {
-        return $this->idUsulan;
-    }
-
-    public function setIdUsulan(?string $idUsulan): self
-    {
-        $this->idUsulan = $idUsulan;
 
         return $this;
     }
@@ -862,5 +853,18 @@ class TrPenetapanAngkaKredit
         return $this;
     }
 
+    public function getIdUsulan(): ?TrUsulan
+    {
+        return $this->idUsulan;
+    }
+
+    public function setIdUsulan(?TrUsulan $idUsulan): self
+    {
+        $this->idUsulan = $idUsulan;
+
+        return $this;
+    }
+
 
 }
+

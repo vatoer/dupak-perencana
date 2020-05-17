@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * RefUnsur
  *
- * @ORM\Table(name="ref_unsur")
+ * @ORM\Table(name="ref_unsur", indexes={@ORM\Index(name="REL_ru_to_jabatan_fungsional", columns={"id_jabatan_fungsional"})})
  * @ORM\Entity(repositoryClass="Application\Repository\RefUnsurRepository")
  */
 class RefUnsur
@@ -20,13 +20,6 @@ class RefUnsur
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="id_jabatan_fungsional", type="string", length=36, nullable=true, options={"default"="NULL"})
-     */
-    private $idJabatanFungsional = 'NULL';
 
     /**
      * @var string|null
@@ -56,21 +49,19 @@ class RefUnsur
      */
     private $kodeAngka = 'NULL';
 
+    /**
+     * @var \RefJabatanFungsional
+     *
+     * @ORM\ManyToOne(targetEntity="RefJabatanFungsional")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_jabatan_fungsional", referencedColumnName="id")
+     * })
+     */
+    private $idJabatanFungsional;
+
     public function getId(): ?string
     {
         return $this->id;
-    }
-
-    public function getIdJabatanFungsional(): ?string
-    {
-        return $this->idJabatanFungsional;
-    }
-
-    public function setIdJabatanFungsional(?string $idJabatanFungsional): self
-    {
-        $this->idJabatanFungsional = $idJabatanFungsional;
-
-        return $this;
     }
 
     public function getNama(): ?string
@@ -121,5 +112,18 @@ class RefUnsur
         return $this;
     }
 
+    public function getIdJabatanFungsional(): ?RefJabatanFungsional
+    {
+        return $this->idJabatanFungsional;
+    }
+
+    public function setIdJabatanFungsional(?RefJabatanFungsional $idJabatanFungsional): self
+    {
+        $this->idJabatanFungsional = $idJabatanFungsional;
+
+        return $this;
+    }
+
 
 }
+
