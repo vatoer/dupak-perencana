@@ -27,7 +27,7 @@ class ReferenceController extends AbstractActionController{
     // Get recent posts
     $kegiatan = $this->entityManager->getRepository(RefButirKegiatan::class)
                      ->findBy([], 
-                              ['idJenjangJabatanFungsional'=>'DESC','kode'=>'DESC']);
+                              ['idJenjangJabatanFungsional'=>'DESC','kode'=>'ASC']);
         
     // Render the view template
     return new ViewModel([

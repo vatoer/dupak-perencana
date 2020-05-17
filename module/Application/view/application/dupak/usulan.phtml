@@ -99,9 +99,11 @@
 <?php
 $this->inlineScript()->captureStart();
 echo <<<JS
-    $("#nav-link-dupak-usulan").addClass("active");
-    $('select').change(function(){
-        location.href = $(this).val();
-    });
+
+    $("#nav-item-dupak").addClass("menu-open");
+    $("#nav-item-dupak > a").addClass("active");
+    $("#nav-item-dupak-usulan > a").addClass("active");
+
+    
 JS;
 $this->inlineScript()->captureEnd();
