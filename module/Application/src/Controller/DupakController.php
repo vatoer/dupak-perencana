@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @see       https://github.com/laminas/laminas-mvc-skeleton for the canonical source repository
  * @copyright https://github.com/laminas/laminas-mvc-skeleton/blob/master/COPYRIGHT.md
@@ -10,11 +9,24 @@ declare(strict_types=1);
 
 namespace Application\Controller;
 
+use Application\Entity\Pegawai;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
 class DupakController extends AbstractActionController
 {
+    /**
+   * Entity manager.
+   * @var Doctrine\ORM\EntityManager
+   */
+  private $entityManager;
+
+  // Constructor method is used to inject dependencies to the controller.
+  public function __construct($entityManager) 
+  {
+    $this->entityManager = $entityManager;
+  }
+
     public function indexAction()
     {
         $vm = new ViewModel();
@@ -24,8 +36,24 @@ class DupakController extends AbstractActionController
     }
 
     public function usulanAction(){
-        $vm = new ViewModel();
 
+        if($this->getRequest()->isPost()){
+            echo 'abc';
+
+            $data = $this->getRequest()->fromPost();
+
+            
+
+            $params = ['action'=>'usulan','a'=>232243];
+            return $this->redirect()->toRoute('dupak',$params);        
+        }
+
+        
+
+        $pegawai = $this->entityManager->getRepository(Pegawai::class)
+        ->findAll();
+        $vm = new ViewModel();
+        $vm->setVariable('pegawai',$pegawai);
         $vm->setVariable('contentTitle','PAK');
         return $vm;
     }

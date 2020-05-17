@@ -20,7 +20,19 @@ class UsulanManager
 
   public function addNewUsulan($data)
   {
-      $usulan = new TrUsulan();
+    $pegawai = $this->entityManager->getRepository(Pegawai::class)
+    ->find($data['pegawai']);
+    $atasan = $this->entityManager->getRepository(Pegawai::class)
+    ->find($data['atasan']);
+    $pengusul = $this->entityManager->getRepository(Pegawai::class)
+    ->find($data['pengusul']);
+
+    $usulan = new TrUsulan();
+    $usulan->setFlagStatus('usulan');
+    $usulan->setIdPegawai($pegawai);
+    $usulan->setIdAtasan($atasan);
+    $usulan->setIdPengusul($pengusul);
+
       //$usulan->setId
   }
 

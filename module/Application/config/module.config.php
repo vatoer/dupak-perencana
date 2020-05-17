@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Application;
 
+use Application\Controller\DupakController;
 use Application\Controller\ReferenceController;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
@@ -75,9 +76,10 @@ return [
     'controllers' => [
         'factories' => [
           Controller\IndexController::class => InvokableFactory::class,
-          Controller\DupakController::class => InvokableFactory::class,
+          //Controller\DupakController::class => InvokableFactory::class,
           Controller\PakController::class => InvokableFactory::class,
           Controller\ReferenceController::class => Factory\ReferenceControllerFactory::class,
+          Controller\DupakController::class => Factory\DupakControllerFactory::class,
         ],
     ],
     'view_manager' => [
