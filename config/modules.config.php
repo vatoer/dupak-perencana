@@ -12,8 +12,18 @@
  * This should be an array of module namespaces used in the application.
  */
 return [
+    'Laminas\Di',
+    'Laminas\Db',
+    'Laminas\Cache',
+    'Laminas\Form',
+    'Laminas\InputFilter',
+    'Laminas\Filter',
+    'Laminas\Hydrator',
+    'Laminas\Paginator',
     'Laminas\Router',
     'Laminas\Validator',
     'Laminas\DeveloperTools',
+    'DoctrineModule',
+    'DoctrineORMModule',
     'Application',
 ];

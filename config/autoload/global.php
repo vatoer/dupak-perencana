@@ -11,7 +11,13 @@
  * control, so do not include passwords or other sensitive information in this
  * file.
  */
-
 return [
-    // ...
+    'db' => [
+        'adapters' => [
+            'Application\Db\OrganisasiAdapter' => [
+                'driver' => 'Pdo',
+                'dsn'    => 'mysql:dbname=organisasi;host=127.0.0.1;charset=utf8',
+            ]
+        ],
+    ],
 ];
