@@ -7,7 +7,7 @@
  */
 namespace Rbac\Service\Factory;
 
-use Psr\Container\ContainerInterface;
+use Interop\Container\ContainerInterface;
 use Rbac\Service\AuthAdapter;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
