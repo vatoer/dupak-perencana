@@ -12,6 +12,9 @@
  * This should be an array of module namespaces used in the application.
  */
 return [
+    'Laminas\Mvc\Plugin\FlashMessenger',
+    'Laminas\Session',
+    'Laminas\Mail',
     'Laminas\Di',
     'Laminas\Db',
     'Laminas\Cache',
@@ -26,5 +29,6 @@ return [
     'DoctrineModule',
     'DoctrineORMModule',
     'Application',
-    'Rbac'
+    'Rbac',
+    'SanSessionToolbar', // put at the end of modules list!
 ];
