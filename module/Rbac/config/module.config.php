@@ -113,39 +113,7 @@ return [
                     ],
                 ]
             ],
-            'rbac1' => [
-                'type'    => Segment::class,
-                'options' => [
-                    'route' => '/setting[/:controller[/:action[/:a[/:b]]]]',
-                    'constraints' => [
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id'     => '[a-zA-Z0-9_-]*',
-                    ],
-                    'defaults' => [
-                        'controller' => Controller\IndexController::class,
-                        'action'     => 'index',
-                        'isAuthorizationRequired' => false // set true if this api Required JWT Authorization.
-                    ],
-                ],
-                'may_terminate' => true,
-                'child_routes' => [
-                    'akses'=>[
-                        'type'    => Segment::class,
-                        'options' => [
-                            'route' => '/akses[/:action[/:id]]',
-                            'constraints' => [
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'id'     => '[a-zA-Z0-9_-]*',
-                            ],
-                            'defaults' => [
-                                'controller' => Controller\IndexController::class,
-                                'action'     => 'index',
-                                'isAuthorizationRequired' => false // set true if this api Required JWT Authorization.
-                            ],
-                        ]
-                    ],
-                ],
-            ],
+            
             'rbac' => [
                 'type'    => Segment::class,
                 'options' => [

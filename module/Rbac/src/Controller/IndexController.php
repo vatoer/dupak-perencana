@@ -76,13 +76,14 @@ class IndexController extends AbstractActionController{
 
         //udah pernah login g usah login lagi
         if($this->authManager->hasIdentity()){
-            $response = [
+            $data = [
                 'error' => 0,
                 'messages' => 'Already Login',
                 'identity'=>$this->authManager->getIdentity()];
-            header("Content-type:application/json");
-            echo json_encode(  $response );
-            exit();
+            $response = $this->getResponse();
+            //$response->setStatusCode(304); // << PENTING STATUS INI
+            $response->setContent(json_encode($data));
+            return $response;
         }
 
 
@@ -131,15 +132,26 @@ class IndexController extends AbstractActionController{
             $isLoginError = true;
         }
 
-        $response['result'] = $result->getIdentity();
-        $response['error'] = $result->isValid() ? 0 : 1 ;
-        $response['messages'] = $result->getMessages();
+        $data['result'] = $result->getIdentity();
+        $data['error'] = $result->isValid() ? 0 : 1 ;
+        $data['messages'] = $result->getMessages();
+
+        
+
 
         $cookie_name = "-";
         $cookie_value = "-";
-        setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
-        header("Content-type:application/json");
-        echo json_encode(  $response );
+
+        $response = $this->getResponse();
+        if($data['error']){
+            $response->setStatusCode(401); // << PENTING STATUS INI
+        }
+        $response->setContent(json_encode($data));
+        return $response;
+
+        //setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+        //header("Content-type:application/json");
+        //echo json_encode(  $data );
         exit();
     }
 

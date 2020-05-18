@@ -21,7 +21,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="/adminlte/index2.html"><b>Admin</b>LTE</a>
+    <a href="/adminlte/index2.html"><b>Dupak</b>Perencana</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -103,16 +103,15 @@ $.when( $.ready ).then(function() {
 
     let url = "/login/authenticate";
     let data = $("form").serialize();
-    let success = function(response){
-      console.log(response);
-    }
+    
     let dataType = 'JSON';
     $.ajax({
       type: "POST",
       url: url,
       data: data,
-      done: success,
       dataType: dataType
+    }).done(function() {
+      window.location.replace("/");
     });
   });
 });
