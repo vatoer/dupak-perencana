@@ -23,7 +23,9 @@
     },
     "autoload": {
         "psr-4": {
-            "Application\\": "module/Application/src/"
+            "Application\\": "module/Application/src/",
+            "Rbac\\": "module/Rbac/src/"
+
         }
     },
     "autoload-dev": {
