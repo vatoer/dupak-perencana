@@ -4,7 +4,6 @@ namespace Application\Repository;
 
 use Application\Entity\TrUsulan;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method TrUsulan|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,12 +11,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method TrUsulan[]    findAll()
  * @method TrUsulan[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TrUsulanRepository extends ServiceEntityRepository
+class TrUsulanRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, TrUsulan::class);
-    }
+    
 
     // /**
     //  * @return TrUsulan[] Returns an array of TrUsulan objects

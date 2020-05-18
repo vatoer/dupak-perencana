@@ -82,6 +82,12 @@ return [
           Controller\DupakController::class => Factory\DupakControllerFactory::class,
         ],
     ],
+    'service_manager' => [
+        //...
+        'factories' => [
+            Service\UsulanManager::class => Service\Factory\UsulanManagerFactory::class,
+        ],
+    ],
     'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,

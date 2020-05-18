@@ -4,7 +4,6 @@ namespace Application\Repository;
 
 use Application\Entity\TrJabatanAdministrasiPegawai;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method TrJabatanAdministrasiPegawai|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,12 +11,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method TrJabatanAdministrasiPegawai[]    findAll()
  * @method TrJabatanAdministrasiPegawai[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TrJabatanAdministrasiPegawaiRepository extends ServiceEntityRepository
+class TrJabatanAdministrasiPegawaiRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, TrJabatanAdministrasiPegawai::class);
-    }
+    
 
     // /**
     //  * @return TrJabatanAdministrasiPegawai[] Returns an array of TrJabatanAdministrasiPegawai objects

@@ -4,7 +4,6 @@ namespace Application\Repository;
 
 use Application\Entity\TrFormasiJabatanPimpinan;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method TrFormasiJabatanPimpinan|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,12 +11,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method TrFormasiJabatanPimpinan[]    findAll()
  * @method TrFormasiJabatanPimpinan[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TrFormasiJabatanPimpinanRepository extends ServiceEntityRepository
+class TrFormasiJabatanPimpinanRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, TrFormasiJabatanPimpinan::class);
-    }
+    
 
     // /**
     //  * @return TrFormasiJabatanPimpinan[] Returns an array of TrFormasiJabatanPimpinan objects

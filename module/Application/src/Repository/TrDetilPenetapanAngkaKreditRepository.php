@@ -4,7 +4,6 @@ namespace Application\Repository;
 
 use Application\Entity\TrDetilPenetapanAngkaKredit;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method TrDetilPenetapanAngkaKredit|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,12 +11,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method TrDetilPenetapanAngkaKredit[]    findAll()
  * @method TrDetilPenetapanAngkaKredit[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TrDetilPenetapanAngkaKreditRepository extends ServiceEntityRepository
+class TrDetilPenetapanAngkaKreditRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, TrDetilPenetapanAngkaKredit::class);
-    }
+    
 
     // /**
     //  * @return TrDetilPenetapanAngkaKredit[] Returns an array of TrDetilPenetapanAngkaKredit objects

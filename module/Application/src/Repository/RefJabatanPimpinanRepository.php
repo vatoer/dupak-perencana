@@ -4,7 +4,6 @@ namespace Application\Repository;
 
 use Application\Entity\RefJabatanPimpinan;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method RefJabatanPimpinan|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,12 +11,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method RefJabatanPimpinan[]    findAll()
  * @method RefJabatanPimpinan[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RefJabatanPimpinanRepository extends ServiceEntityRepository
+class RefJabatanPimpinanRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, RefJabatanPimpinan::class);
-    }
+    
 
     // /**
     //  * @return RefJabatanPimpinan[] Returns an array of RefJabatanPimpinan objects

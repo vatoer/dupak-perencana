@@ -17,7 +17,7 @@ class RefStrukturalKemlu
      *
      * @ORM\Column(name="kd_jabatan", type="string", length=25, nullable=false, options={"default"="'NULL'"})
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="UUID")
      */
     private $kdJabatan = '\'NULL\'';
 

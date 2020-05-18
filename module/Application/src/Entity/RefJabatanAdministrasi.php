@@ -17,7 +17,7 @@ class RefJabatanAdministrasi
      *
      * @ORM\Column(name="id", type="string", length=36, nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="UUID")
      */
     private $id;
 

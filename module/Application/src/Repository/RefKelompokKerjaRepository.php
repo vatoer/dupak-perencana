@@ -4,7 +4,6 @@ namespace Application\Repository;
 
 use Application\Entity\RefKelompokKerja;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method RefKelompokKerja|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,12 +11,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method RefKelompokKerja[]    findAll()
  * @method RefKelompokKerja[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RefKelompokKerjaRepository extends ServiceEntityRepository
+class RefKelompokKerjaRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, RefKelompokKerja::class);
-    }
+
 
     // /**
     //  * @return RefKelompokKerja[] Returns an array of RefKelompokKerja objects

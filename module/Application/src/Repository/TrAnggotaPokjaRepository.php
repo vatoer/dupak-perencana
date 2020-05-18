@@ -4,7 +4,6 @@ namespace Application\Repository;
 
 use Application\Entity\TrAnggotaPokja;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method TrAnggotaPokja|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,12 +11,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method TrAnggotaPokja[]    findAll()
  * @method TrAnggotaPokja[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TrAnggotaPokjaRepository extends ServiceEntityRepository
+class TrAnggotaPokjaRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, TrAnggotaPokja::class);
-    }
+   
 
     // /**
     //  * @return TrAnggotaPokja[] Returns an array of TrAnggotaPokja objects

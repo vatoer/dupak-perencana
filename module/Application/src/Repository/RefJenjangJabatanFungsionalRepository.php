@@ -4,7 +4,6 @@ namespace Application\Repository;
 
 use Application\Entity\RefJenjangJabatanFungsional;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method RefJenjangJabatanFungsional|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,13 +11,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method RefJenjangJabatanFungsional[]    findAll()
  * @method RefJenjangJabatanFungsional[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RefJenjangJabatanFungsionalRepository extends ServiceEntityRepository
+class RefJenjangJabatanFungsionalRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, RefJenjangJabatanFungsional::class);
-    }
-
+    
     // /**
     //  * @return RefJenjangJabatanFungsional[] Returns an array of RefJenjangJabatanFungsional objects
     //  */

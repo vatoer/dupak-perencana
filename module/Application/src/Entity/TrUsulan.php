@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TrUsulan
  *
- * @ORM\Table(name="tr_usulan", indexes={@ORM\Index(name="REL_atasan_to_pegawai", columns={"id_atasan"}), @ORM\Index(name="REL_pengusul_to_pegawai", columns={"id_pengusul"})})
+ * @ORM\Table(name="tr_usulan", indexes={@ORM\Index(name="REL_usulan_to_ref_organisasi", columns={"id_organisasi_pegawai"}), @ORM\Index(name="REL_atasan_to_pegawai", columns={"id_atasan"}), @ORM\Index(name="Rel_usulan_to_pegawai", columns={"id_pegawai"}), @ORM\Index(name="REL_pengusul_to_pegawai", columns={"id_pengusul"})})
  * @ORM\Entity(repositoryClass="Application\Repository\TrUsulanRepository")
  */
 class TrUsulan
@@ -17,191 +17,265 @@ class TrUsulan
      *
      * @ORM\Column(name="id", type="string", length=36, nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="UUID")
      */
     private $id;
 
     /**
-     * @var string|null
+     * @var \Pegawai
      *
-     * @ORM\Column(name="id_pegawai", type="string", length=36, nullable=true, options={"default"="NULL"})
+     * @ORM\ManyToOne(targetEntity="Pegawai")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_pegawai", referencedColumnName="id")
+     * })
      */
-    private $idPegawai = 'NULL';
+    private $idPegawai = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="panggol_atasan", type="string", length=50, nullable=true, options={"default"="NULL"})
      */
-    private $panggolAtasan = 'NULL';
+    private $panggolAtasan = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="panggol_pengusul", type="string", length=50, nullable=true, options={"default"="NULL"})
      */
-    private $panggolPengusul = 'NULL';
+    private $panggolPengusul = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="id_organisasi_atasan", type="string", length=36, nullable=true, options={"default"="NULL"})
      */
-    private $idOrganisasiAtasan = 'NULL';
+    private $idOrganisasiAtasan = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="id_organisasi_pengusul", type="string", length=36, nullable=true, options={"default"="NULL"})
      */
-    private $idOrganisasiPengusul = 'NULL';
+    private $idOrganisasiPengusul = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="flag_status", type="string", length=10, nullable=true, options={"default"="NULL"})
      */
-    private $flagStatus = 'NULL';
+    private $flagStatus = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="id_flow_path", type="string", length=36, nullable=true, options={"default"="NULL"})
      */
-    private $idFlowPath = 'NULL';
+    private $idFlowPath = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="flow_status", type="string", length=36, nullable=true, options={"default"="NULL"})
      */
-    private $flowStatus = 'NULL';
+    private $flowStatus = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="penilai_1_id", type="string", length=36, nullable=true, options={"default"="NULL"})
      */
-    private $penilai1Id = 'NULL';
+    private $penilai1Id = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="penilai_1_nip", type="string", length=25, nullable=true, options={"default"="NULL"})
      */
-    private $penilai1Nip = 'NULL';
+    private $penilai1Nip = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="penilai_1_panggol", type="string", length=50, nullable=true, options={"default"="NULL"})
      */
-    private $penilai1Panggol = 'NULL';
+    private $penilai1Panggol = NULL;
 
     /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="penilai_1_dt_start", type="datetime", nullable=true, options={"default"="NULL"})
      */
-    private $penilai1DtStart = 'NULL';
+    private $penilai1DtStart = NULL;
 
     /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="penilai_1_dt_end", type="datetime", nullable=true, options={"default"="NULL"})
      */
-    private $penilai1DtEnd = 'NULL';
+    private $penilai1DtEnd = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="penilai_1_status", type="string", length=10, nullable=true, options={"default"="NULL"})
      */
-    private $penilai1Status = 'NULL';
+    private $penilai1Status = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="penilai_2_id", type="string", length=36, nullable=true, options={"default"="NULL"})
      */
-    private $penilai2Id = 'NULL';
+    private $penilai2Id = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="penilai_2_nip", type="string", length=25, nullable=true, options={"default"="NULL"})
      */
-    private $penilai2Nip = 'NULL';
+    private $penilai2Nip = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="penilai_2_panggol", type="string", length=50, nullable=true, options={"default"="NULL"})
      */
-    private $penilai2Panggol = 'NULL';
+    private $penilai2Panggol = NULL;
 
     /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="penilai_2_dt_start", type="datetime", nullable=true, options={"default"="NULL"})
      */
-    private $penilai2DtStart = 'NULL';
+    private $penilai2DtStart = NULL;
 
     /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="penilai_2_dt_end", type="datetime", nullable=true, options={"default"="NULL"})
      */
-    private $penilai2DtEnd = 'NULL';
+    private $penilai2DtEnd = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="penilai_2_status", type="string", length=10, nullable=true, options={"default"="NULL"})
      */
-    private $penilai2Status = 'NULL';
+    private $penilai2Status = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="penilai_3_id", type="string", length=36, nullable=true, options={"default"="NULL"})
      */
-    private $penilai3Id = 'NULL';
+    private $penilai3Id = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="penilai_3_nip", type="string", length=25, nullable=true, options={"default"="NULL"})
      */
-    private $penilai3Nip = 'NULL';
+    private $penilai3Nip = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="penilai_3_panggol", type="string", length=50, nullable=true, options={"default"="NULL"})
      */
-    private $penilai3Panggol = 'NULL';
+    private $penilai3Panggol = NULL;
 
     /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="penilai_3_dt_start", type="datetime", nullable=true, options={"default"="NULL"})
      */
-    private $penilai3DtStart = 'NULL';
+    private $penilai3DtStart = NULL;
 
     /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="penilai_3_dt_end", type="datetime", nullable=true, options={"default"="NULL"})
      */
-    private $penilai3DtEnd = 'NULL';
+    private $penilai3DtEnd = NULL;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="penilai_3_status", type="string", length=10, nullable=true, options={"default"="NULL"})
      */
-    private $penilai3Status = 'NULL';
+    private $penilai3Status = NULL;
+
+
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="atasan_dt_update", type="datetime", nullable=true, options={"default"="NULL"})
+     */
+    private $atasanDtUpdate = NULL;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="atasan_status", type="string", length=10, nullable=true, options={"default"="NULL"})
+     */
+    private $atasanStatus = NULL;
+
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="pengusul_dt_update", type="datetime", nullable=true, options={"default"="NULL"})
+     */
+    private $pengusulDtUpdate = NULL;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="pengusul_status", type="string", length=10, nullable=true, options={"default"="NULL"})
+     */
+    private $pengusulStatus = NULL;
+
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="periode_mulai", type="date", nullable=true, options={"default"="NULL"})
+     */
+    private $periodeMulai = NULL;
+
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="periode_akhir", type="date", nullable=true, options={"default"="NULL"})
+     */
+    private $periodeAkhir = NULL;
+
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="meta_dt_create", type="datetime", nullable=true, options={"default"="NULL"})
+     */
+    private $metaDtCreate = NULL;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="meta_create_by", type="string", length=36, nullable=true, options={"default"="NULL"})
+     */
+    private $metaCreateBy = NULL;
+
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="meta_dt_update", type="datetime", nullable=true, options={"default"="NULL"})
+     */
+    private $metaDtUpdate = NULL;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="meta_update_by", type="string", length=36, nullable=true, options={"default"="NULL"})
+     */
+    private $metaUpdateBy = NULL;
 
     /**
      * @var \Pegawai
@@ -223,23 +297,22 @@ class TrUsulan
      */
     private $idPengusul;
 
+    /**
+     * @var \RefOrganisasi
+     *
+     * @ORM\ManyToOne(targetEntity="RefOrganisasi")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_organisasi_pegawai", referencedColumnName="id")
+     * })
+     */
+    private $idOrganisasiPegawai;
+
     public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function getIdPegawai(): ?string
-    {
-        return $this->idPegawai;
-    }
-
-    public function setIdPegawai(?string $idPegawai): self
-    {
-        $this->idPegawai = $idPegawai;
-
-        return $this;
-    }
-
+    
     public function getPanggolAtasan(): ?string
     {
         return $this->panggolAtasan;
@@ -540,6 +613,138 @@ class TrUsulan
         return $this;
     }
 
+public function getAtasanDtUpdate(): ?\DateTimeInterface
+    {
+        return $this->atasanDtUpdate;
+    }
+
+    public function setAtasanDtUpdate(?\DateTimeInterface $atasanDtUpdate): self
+    {
+        $this->atasanDtUpdate = $atasanDtUpdate;
+
+        return $this;
+    }
+
+    public function getPengusulDtUpdate(): ?\DateTimeInterface
+    {
+        return $this->pengusulDtUpdate;
+    }
+
+    public function setPengusulDtUpdate(?\DateTimeInterface $pengusulDtUpdate): self
+    {
+        $this->pengusulDtUpdate = $pengusulDtUpdate;
+
+        return $this;
+    }
+
+public function getAtasanStatus(): ?string
+{
+    return $this->atasanStatus;
+}
+
+public function setAtasanStatus(?string $atasanStatus): self
+{
+    $this->atasanStatus = $atasanStatus;
+
+    return $this;
+}
+
+public function getPengusulStatus(): ?string
+{
+    return $this->pengusulStatus;
+}
+
+public function setPengusulStatus(?string $pengusulStatus): self
+{
+    $this->pengusulStatus = $pengusulStatus;
+
+    return $this;
+}
+
+public function getPeriodeMulai(): ?\DateTimeInterface
+    {
+        return $this->periodeMulai;
+    }
+
+    public function setPeriodeMulai(?\DateTimeInterface $periodeMulai): self
+    {
+        $this->periodeMulai = $periodeMulai;
+
+        return $this;
+    }
+
+    public function getPeriodeAkhir(): ?\DateTimeInterface
+    {
+        return $this->periodeAkhir;
+    }
+
+    public function setPeriodeAkhir(?\DateTimeInterface $periodeAkhir): self
+    {
+        $this->periodeAkhir = $periodeAkhir;
+
+        return $this;
+    }
+
+    public function getMetaDtCreate(): ?\DateTimeInterface
+    {
+        return $this->metaDtCreate;
+    }
+
+    public function setMetaDtCreate(?\DateTimeInterface $metaDtCreate): self
+    {
+        $this->metaDtCreate = $metaDtCreate;
+
+        return $this;
+    }
+
+    public function getMetaCreateBy(): ?string
+    {
+        return $this->metaCreateBy;
+    }
+
+    public function setMetaCreateBy(?string $metaCreateBy): self
+    {
+        $this->metaCreateBy = $metaCreateBy;
+
+        return $this;
+    }
+
+    public function getMetaDtUpdate(): ?\DateTimeInterface
+    {
+        return $this->metaDtUpdate;
+    }
+
+    public function setMetaDtUpdate(?\DateTimeInterface $metaDtUpdate): self
+    {
+        $this->metaDtUpdate = $metaDtUpdate;
+
+        return $this;
+    }
+
+    public function getMetaUpdateBy(): ?string
+    {
+        return $this->metaUpdateBy;
+    }
+
+    public function setMetaUpdateBy(?string $metaUpdateBy): self
+    {
+        $this->metaUpdateBy = $metaUpdateBy;
+
+        return $this;
+    }
+
+    public function getIdPegawai(): ?Pegawai
+    {
+        return $this->idPegawai;
+    }
+
+    public function setIdPegawai(?Pegawai $idPegawai): self
+    {
+        $this->idPegawai = $idPegawai;
+
+        return $this;
+    }
+
     public function getIdAtasan(): ?Pegawai
     {
         return $this->idAtasan;
@@ -563,6 +768,20 @@ class TrUsulan
 
         return $this;
     }
+
+    public function getIdOrganisasiPegawai(): ?RefOrganisasi
+    {
+        return $this->idOrganisasiPegawai;
+    }
+
+    public function setIdOrganisasiPegawai(?RefOrganisasi $idOrganisasiPegawai): self
+    {
+        $this->idOrganisasiPegawai = $idOrganisasiPegawai;
+
+        return $this;
+    }
+
+
 
 
 }

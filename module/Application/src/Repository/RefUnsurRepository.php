@@ -4,7 +4,6 @@ namespace Application\Repository;
 
 use Application\Entity\RefUnsur;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method RefUnsur|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,12 +11,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method RefUnsur[]    findAll()
  * @method RefUnsur[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RefUnsurRepository extends ServiceEntityRepository
+class RefUnsurRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, RefUnsur::class);
-    }
+    
 
     // /**
     //  * @return RefUnsur[] Returns an array of RefUnsur objects

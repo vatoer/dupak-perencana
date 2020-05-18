@@ -4,7 +4,6 @@ namespace Application\Repository;
 
 use Application\Entity\RefButirKegiatan;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method RefButirKegiatan|null find($id, $lockMode = null, $lockVersion = null)

@@ -4,7 +4,6 @@ namespace Application\Repository;
 
 use Application\Entity\RefOrganisasi;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method RefOrganisasi|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,13 +11,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method RefOrganisasi[]    findAll()
  * @method RefOrganisasi[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RefOrganisasiRepository extends ServiceEntityRepository
+class RefOrganisasiRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, RefOrganisasi::class);
-    }
-
     // /**
     //  * @return RefOrganisasi[] Returns an array of RefOrganisasi objects
     //  */

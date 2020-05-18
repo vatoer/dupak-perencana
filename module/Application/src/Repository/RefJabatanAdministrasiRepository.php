@@ -4,7 +4,6 @@ namespace Application\Repository;
 
 use Application\Entity\RefJabatanAdministrasi;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method RefJabatanAdministrasi|null find($id, $lockMode = null, $lockVersion = null)
@@ -12,13 +11,9 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method RefJabatanAdministrasi[]    findAll()
  * @method RefJabatanAdministrasi[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RefJabatanAdministrasiRepository extends ServiceEntityRepository
+class RefJabatanAdministrasiRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, RefJabatanAdministrasi::class);
-    }
-
+    
     // /**
     //  * @return RefJabatanAdministrasi[] Returns an array of RefJabatanAdministrasi objects
     //  */

@@ -15,11 +15,11 @@ class Pegawai
     /**
      * @var string
      *
-     * @ORM\Column(name="id", type="string", length=36, nullable=false, options={"default"="'uuid()'"})
+     * @ORM\Column(name="id", type="string", length=36, nullable=false )
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="UUID")
      */
-    private $id = '\'uuid()\'';
+    private $id;
 
     /**
      * @var string|null
@@ -152,6 +152,11 @@ class Pegawai
      * })
      */
     private $jabatanFungsional;
+
+    public function __toString()
+    {
+        return $this->nip;
+    }
 
     public function getId(): ?string
     {
