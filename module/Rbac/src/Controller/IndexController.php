@@ -12,6 +12,8 @@ use Laminas\Stdlib\ResponseInterface as Response;
 use Laminas\View\Model\JsonModel;
 use Laminas\View\Model\ViewModel;
 use Laminas\Session\Container;
+use Laminas\Uri\Uri;
+
 class IndexController extends AbstractActionController{
 
     protected $authAdapter;
@@ -91,15 +93,19 @@ class IndexController extends AbstractActionController{
             throw new \Exception("Too long redirectUrl argument passed");
         }
 
-        $email = $this->params()->fromPost('inputEmail', 'default_val');
-        $password = $this->params()->fromPost('inputPassword', 'default_val');
+        $username = $this->params()->fromPost('username', '_def');
+        $password = $this->params()->fromPost('password', '_def');
 
         // Perform login attempt.
-        $result = $this->authManager->login($email,
+        $result = $this->authManager->login($username,
             $password, null );
+
+        
 
         // Check result.
         if ($result->getCode() == Result::SUCCESS) {
+
+            //var_dump($this->authManager->hasIdentity().'cuk');exit;    
 
             //save ke session
             //TODO
@@ -125,11 +131,10 @@ class IndexController extends AbstractActionController{
             $isLoginError = true;
         }
 
-        $response['result'] = $result;
+        $response['result'] = $result->getIdentity();
         $response['error'] = $result->isValid() ? 0 : 1 ;
         $response['messages'] = $result->getMessages();
-        //$response['data'] =(array)($authResult);
-        //$response['hash'] = $passwordHash;
+
         $cookie_name = "-";
         $cookie_value = "-";
         setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day

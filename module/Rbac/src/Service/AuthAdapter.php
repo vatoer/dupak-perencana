@@ -66,6 +66,20 @@ class AuthAdapter implements AdapterInterface
         $this->email = $email;
     }
 
+
+    /**
+     * Username.
+     * @var string
+     */
+    private $username;
+    /**
+     * Sets user username.
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
     /**
      * Sets password.
      */
@@ -86,7 +100,7 @@ class AuthAdapter implements AdapterInterface
             return  new Result(
                 Result::FAILURE,
                 null,
-                ['Authentication Failed']);
+                ['Authentication Failed xx']);
         }
 
         // Check the database if there is a user with such email.
@@ -94,7 +108,7 @@ class AuthAdapter implements AdapterInterface
         $user = $this->entityManager->getRepository(User::class)
                 ->findOneByUsername($this->username);
         
-        //var_dump($this->email);exit;
+        //var_dump($user->getEmail());exit;
         //return $user;
         // If there is no such user, return 'Identity Not Found' status.
         if ($user == null) {
@@ -134,9 +148,12 @@ class AuthAdapter implements AdapterInterface
         if ($bcrypt->verify($this->password, $passwordHash)) {
             // Great! The password hash matches. Return user identity (email) to be
             // saved in session for later use.
+
+            $identity = ['username'=>$user->getUsername(),'email'=>$user->getEmail()] ;
+
             return  new Result(
                 Result::SUCCESS,
-                $this->email,
+                $identity,
                 ['Non Ldap Authenticated successfully.']);
         }
 

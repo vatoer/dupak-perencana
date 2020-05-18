@@ -72,7 +72,7 @@ class AuthManager
      * @return Result
      * @throws \Exception
      */
-    public function login($email, $password, $rememberMe)
+    public function login($username, $password, $rememberMe)
     {
         // Check if user has already logged in. If so, do not allow to log in
         // twice.
@@ -83,7 +83,7 @@ class AuthManager
 
             // Authenticate with login/password.
         $authAdapter = $this->authService->getAdapter();
-        $authAdapter->setEmail($email);
+        $authAdapter->setUsername($username);
         $authAdapter->setPassword($password);
         $result = $this->authService->authenticate($authAdapter);
 
@@ -96,7 +96,7 @@ class AuthManager
             $hydrator = new Hydrator;
 
             //session g bs simpan value bentuk object
-            $this->sessionContainer->offsetSet('x','x');
+            $this->sessionContainer->offsetSet('user',$user);
             $this->sessionContainer->offsetSet('x','y');
 
         }
