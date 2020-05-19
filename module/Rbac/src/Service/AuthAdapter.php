@@ -13,6 +13,7 @@ use Laminas\Authentication\Result;
 use Laminas\Crypt\Password\Bcrypt;
 use Rbac\Entity\User;
 use Laminas\Authentication\Adapter\Ldap;
+use Laminas\Hydrator\Filter\MethodMatchFilter;
 use Laminas\Hydrator\ReflectionHydrator;
 
 class AuthAdapter implements AdapterInterface
@@ -149,8 +150,10 @@ class AuthAdapter implements AdapterInterface
             $identity = ['username'=>$user->getUsername(),'email'=>$user->getEmail()] ;
 
             $hydrator = new ReflectionHydrator();
-            //$hydrator->addFilter('password',) //TODO
+            //$hydrator->addFilter('getPassword', new MethodMatchFilter('getPassword')); //TODO
+            $hydrator->addFilter('password', new MethodMatchFilter('getPassword')); //TODO
             $identity = $hydrator->extract($user);
+            unset($identity['password']);
 
             return  new Result(
                 Result::SUCCESS,
