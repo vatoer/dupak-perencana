@@ -8,16 +8,15 @@
 
 namespace Rbac\Service;
 
-use Rbac\Model\UsersRepository;
 use Laminas\Authentication\Adapter\AdapterInterface;
 use Laminas\Authentication\Result;
 use Laminas\Crypt\Password\Bcrypt;
 use Rbac\Entity\User;
 use Laminas\Authentication\Adapter\Ldap;
+use Laminas\Hydrator\ReflectionHydrator;
 
 class AuthAdapter implements AdapterInterface
 {
-    protected $usersRepository;
     private $user;
     protected $result;
 
@@ -92,9 +91,6 @@ class AuthAdapter implements AdapterInterface
      */
     public function authenticate()
     {
-
-        
-
         //cek for empty input
         if(empty($this->username) OR empty($this->password)){
             return  new Result(
@@ -118,6 +114,7 @@ class AuthAdapter implements AdapterInterface
                 ['user not found : Invalid credentials.']);
         }
 
+        //ini user sudah ada nilainya
         $this->user = $user;
 
         // If the user with such email exists, we need to check if it is active or retired.
@@ -150,6 +147,10 @@ class AuthAdapter implements AdapterInterface
             // saved in session for later use.
 
             $identity = ['username'=>$user->getUsername(),'email'=>$user->getEmail()] ;
+
+            $hydrator = new ReflectionHydrator();
+            //$hydrator->addFilter('password',) //TODO
+            $identity = $hydrator->extract($user);
 
             return  new Result(
                 Result::SUCCESS,

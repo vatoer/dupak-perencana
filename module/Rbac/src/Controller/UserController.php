@@ -65,18 +65,6 @@ class UserController extends AbstractActionController
     public function indexAction()
     {
         $v = new ViewModel();
-
-        $tes = 0;
-        // Access control.
-        if (!$this->access('user.manage')) {
-            $this->getResponse()->setStatusCode(401);
-            $tes = 1;
-            $v->setVariable('users','ini lah');
-            return;
-        }
-        $v->setVariable('users','sampe sini ');
-        return $v;
-
     }
 
 
@@ -105,6 +93,18 @@ class UserController extends AbstractActionController
         return new ViewModel([
             //'user' => $user
         ]);
+    }
+
+    public function resetAllAction(){
+
+
+        $this->userManager->resetPasswordAll();
+
+        return $this->getResponse();
+
+        // $vm = new ViewModel();
+        // $vm->setTerminal(true); // Does not affect any render behaviour (?)
+        // return $vm;
     }
 
    

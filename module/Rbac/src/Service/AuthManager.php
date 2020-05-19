@@ -95,9 +95,9 @@ class AuthManager
 
             $hydrator = new Hydrator;
 
-            //session g bs simpan value bentuk object
-            $this->sessionContainer->offsetSet('user',$user);
-            $this->sessionContainer->offsetSet('x','y');
+            //session bisa disimpan disini
+            //$this->sessionContainer->offsetSet('user',$user);
+            //$this->sessionContainer->offsetSet('x','y');
 
         }
 

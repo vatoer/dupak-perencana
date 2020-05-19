@@ -8,7 +8,6 @@
 namespace Rbac\View\Helper\Factory;
 use Laminas\Authentication\AuthenticationService;
 use Interop\Container\ContainerInterface;
-use Rbac\Model\UsersRepository;
 use Rbac\View\Helper\UserInfo;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 

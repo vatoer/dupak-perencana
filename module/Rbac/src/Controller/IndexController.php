@@ -101,8 +101,6 @@ class IndexController extends AbstractActionController{
         $result = $this->authManager->login($username,
             $password, null );
 
-        
-
         // Check result.
         if ($result->getCode() == Result::SUCCESS) {
 

@@ -38,6 +38,11 @@ class User
      */
     private $email = NULL;
 
+      /** 
+     * @ORM\Column(name="full_name")  
+     */
+    protected $fullName;
+
     /**
      * @var string
      *
@@ -120,6 +125,25 @@ class User
     {
         $this->password = $password;
 
+        return $this;
+    }
+
+    /**
+     * Returns full name.
+     * @return string     
+     */
+    public function getFullName(): ?string 
+    {
+        return $this->fullName;
+    }       
+
+    /**
+     * Sets full name.
+     * @param string $fullName
+     */
+    public function setFullName($fullName): self
+    {
+        $this->fullName = $fullName;
         return $this;
     }
 
