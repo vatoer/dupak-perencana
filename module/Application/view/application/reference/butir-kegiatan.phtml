@@ -50,65 +50,68 @@ function toDataTable($tr){
 
 ?>
 
+
 <div class="row">
-<div class=" col-12">
-<div class="card card-primary">
-    <div class="card-header">
-    <h3 class="card-title">Formulir Periode Kegiatan Jabatan Fungsional</h3>
-    </div>
-    <!-- /.card-header -->
-    <!-- form start -->
-    
-    <div class="card-body">
-        
-        <div class="row">
-              
-              <div class="col-12">
-                <div class="form-group select2-purple">
-                  <label>Multiple</label>
-                  <select class="select2" multiple="multiple" data-dropdown-css-class="select2-purple"  data-placeholder="Pilih Kegiatan" style="width: 100%;">
-                    <?=$optionsButirKegiatan;?>
-                  </select>
-                </div>
-                <!-- /.form-group -->
-              </div>
-              <!-- /.col -->
+    <div class=" col-12">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Daftar Kegiatan</h3>
             </div>
-            <!-- /.row -->
-        
-    </div>
-    <!-- /.card-body -->
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form role="form">
+                <div class="card-body">
+                    <?=toDataTable($tr);?>
+                </div>
+                <!-- /.card-body -->
 
-    <div class="card-footer">
-        <button type="submit" class="btn btn-primary float-right">Simpan Periode Dupak</button>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.card -->
     </div>
+</div>
 
-</div>
-<!-- /.card -->
-</div>
-</div>
 
 <div class="row">
-<div class=" col-12">
-<div class="card card-primary">
-    <div class="card-header">
-    <h3 class="card-title">Daftar Kegiatan</h3>
-    </div>
-    <!-- /.card-header -->
-    <!-- form start -->
-    <form role="form">
-    <div class="card-body">
-        <?=toDataTable($tr);?>
-    </div>
-    <!-- /.card-body -->
+    <div class=" col-12">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Formulir Periode Kegiatan Jabatan Fungsional</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
 
-    <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-12">
+                        <div class="form-group select2-purple">
+                            <label>Multiple</label>
+                            <select class="select2" multiple="multiple" data-dropdown-css-class="select2-purple"
+                                data-placeholder="Pilih Kegiatan" style="width: 100%;">
+                                <?=$optionsButirKegiatan;?>
+                            </select>
+                        </div>
+                        <!-- /.form-group -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary float-right">Simpan Periode Dupak</button>
+            </div>
+
+        </div>
+        <!-- /.card -->
     </div>
-    </form>
-</div>
-<!-- /.card -->
-</div>
 </div>
 
 <?php

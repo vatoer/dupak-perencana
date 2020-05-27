@@ -1,44 +1,26 @@
 <?php 
-//use Application\Entity\RefButirKegiatan;
-$optionsButirKegiatan = "";
+//use Application\Entity\RefJenjangJabatanFungsional;
+$optionsJabatanFungsional = "";
 $tr = "";
-foreach ($this->kegiatan as $k ) {
-   // echo $k->getIdJenjangJabatanFungsional()->getNama() ."<br/>";
-   // echo $k->getIdSubUnsur()->getIdUnsur()->getNama() ."<br/>";
-   // echo $k->getIdSubUnsur()->getNama() ."<br/>";
-   // echo $k->getKegiatan() ."<br/>";
-   $jenjang = $k->getIdJenjangJabatanFungsional()->getNama();
-   $unsur = $k->getIdSubUnsur()->getIdUnsur()->getNama();
-   $subUnsur =    $k->getIdSubUnsur()->getNama();
-    $kegiatan = $k->getKegiatan();
-    $ak = $k->getAngkaKredit()?$k->getAngkaKredit():0 ;
-    $kode = $k->getKode();
-
-    
-
-   $text = '['.$jenjang. '] Unsur: '. $unsur.' '.$subUnsur.' '.$kegiatan;
-   $value = $k->getId();
-   $optionsButirKegiatan .= "<option value='$value'>$text</option>";
-
-   $tr .= "<tr>".
-        "<td>$jenjang</td>". 
-        "<td>$kode</td>". 
-        "<td>$unsur</td>".
-        "<td>$subUnsur</td>".
-        "<td>$kegiatan</td>".
-        "<td>$ak</td></tr>";
+if(isset($this->jabatanFungsional)){
+    foreach ($this->jabatanFungsional as $jf ) {
+        $kode = $jf->getKode();
+        $nama = $jf->getNama();
+        $text = '['.$kode. ']' .$nama;
+        $value = $k->getId();
+        $optionsJabatanFungsional .= "<option value='$value'>$text</option>";
+        $tr .= "<tr>".
+            "<td>$kode</td>". 
+            "<td>$nama</td>";
+    }
 }
 
 function toDataTable($tr){
-    $datatable = "<table class='Datatable table display' id='dtButirKegiatan'>
+    $datatable = "<table class='Datatable table display' id='dtJenjangJabatanFungsional'>
     <thead>
     <tr>
-        <th>Jenjang</th>
         <th>kode</th>
-        <th>Unsur</th>
-        <th>Sub Unsur</th>
-        <th>Butir Kegiatan</th>
-        <th>Angka Kredit</th>
+        <th>Nama</th>
     </tr>
     </thead>
     <tbody>
@@ -51,71 +33,35 @@ function toDataTable($tr){
 ?>
 
 <div class="row">
-<div class=" col-12">
-<div class="card card-primary">
-    <div class="card-header">
-    <h3 class="card-title">Formulir Periode Kegiatan Jabatan Fungsional</h3>
-    </div>
-    <!-- /.card-header -->
-    <!-- form start -->
-    
-    <div class="card-body">
-        
-        <div class="row">
-              
-              <div class="col-12">
-                <div class="form-group select2-purple">
-                  <label>Multiple</label>
-                  <select class="select2" multiple="multiple" data-dropdown-css-class="select2-purple"  data-placeholder="Pilih Kegiatan" style="width: 100%;">
-                    <?=$optionsButirKegiatan;?>
-                  </select>
-                </div>
-                <!-- /.form-group -->
-              </div>
-              <!-- /.col -->
+    <div class=" col-12">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Daftar Jabatan Fungsional</h3>
             </div>
-            <!-- /.row -->
-        
-    </div>
-    <!-- /.card-body -->
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form role="form">
+                <div class="card-body">
+                    <?=toDataTable($tr);?>
+                </div>
+                <!-- /.card-body -->
 
-    <div class="card-footer">
-        <button type="submit" class="btn btn-primary float-right">Simpan Periode Dupak</button>
+                <div class="card-footer">
+                <button type="button" class="btn btn-primary float-right">Tambah Jabatan Fungsional</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.card -->
     </div>
-
-</div>
-<!-- /.card -->
-</div>
-</div>
-
-<div class="row">
-<div class=" col-12">
-<div class="card card-primary">
-    <div class="card-header">
-    <h3 class="card-title">Daftar Kegiatan</h3>
-    </div>
-    <!-- /.card-header -->
-    <!-- form start -->
-    <form role="form">
-    <div class="card-body">
-        <?=toDataTable($tr);?>
-    </div>
-    <!-- /.card-body -->
-
-    <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-    </form>
-</div>
-<!-- /.card -->
-</div>
 </div>
 
 <?php
 $this->inlineScript()->captureStart();
 echo <<<JS
 
-    $('.select2').select2();
+    $('.select2').select2({
+        theme: 'bootstrap4'
+    })
 
     $("#nav-item-data-referensi").addClass("menu-open");
     $("#nav-item-data-referensi > a").addClass("active");
@@ -125,7 +71,7 @@ echo <<<JS
         //location.href = $(this).val();
     });
 
-    $("#dtButirKegiatan").DataTable({
+    $("#dtJenjangJabatanFungsional").DataTable({
       "responsive": true,
       "autoWidth": false,
     });
