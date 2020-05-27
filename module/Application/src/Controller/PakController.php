@@ -20,4 +20,16 @@ class PakController extends AbstractActionController
         $vm = new ViewModel();
         return new ViewModel();
     }
+
+    public function penetapanAction()
+    {
+        $vm = new ViewModel();
+        return new ViewModel();
+    }
+
+    public function riwayatAction()
+    {
+        $vm = new ViewModel();
+        return new ViewModel();
+    }
 }
