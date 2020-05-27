@@ -61,6 +61,16 @@ return [
                     ],
                 ],
             ],
+            'settings' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/settings[/:action[/:a[/:b[/:c]]]]',
+                    'defaults' => [
+                        'controller' => Controller\SettingsController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'reference' => [
                 'type'    => Segment::class,
                 'options' => [
@@ -76,10 +86,10 @@ return [
     'controllers' => [
         'factories' => [
           Controller\IndexController::class => InvokableFactory::class,
-          //Controller\DupakController::class => InvokableFactory::class,
           Controller\PakController::class => InvokableFactory::class,
           Controller\ReferenceController::class => Factory\ReferenceControllerFactory::class,
           Controller\DupakController::class => Factory\DupakControllerFactory::class,
+          Controller\SettingsController::class => InvokableFactory::class,
         ],
     ],
     'service_manager' => [
