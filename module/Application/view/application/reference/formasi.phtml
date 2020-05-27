@@ -2,43 +2,44 @@
 //use Application\Entity\RefButirKegiatan;
 $optionsButirKegiatan = "";
 $tr = "";
-foreach ($this->kegiatan as $k ) {
-   // echo $k->getIdJenjangJabatanFungsional()->getNama() ."<br/>";
-   // echo $k->getIdSubUnsur()->getIdUnsur()->getNama() ."<br/>";
-   // echo $k->getIdSubUnsur()->getNama() ."<br/>";
-   // echo $k->getKegiatan() ."<br/>";
-   $jenjang = $k->getIdJenjangJabatanFungsional()->getNama();
-   $unsur = $k->getIdSubUnsur()->getIdUnsur()->getNama();
-   $subUnsur =    $k->getIdSubUnsur()->getNama();
-    $kegiatan = $k->getKegiatan();
-    $ak = $k->getAngkaKredit()?$k->getAngkaKredit():0 ;
-    $kode = $k->getKode();
-
-    
-
-   $text = '['.$jenjang. '] Unsur: '. $unsur.' '.$subUnsur.' '.$kegiatan;
-   $value = $k->getId();
-   $optionsButirKegiatan .= "<option value='$value'>$text</option>";
-
-   $tr .= "<tr>".
-        "<td>$jenjang</td>". 
-        "<td>$kode</td>". 
-        "<td>$unsur</td>".
-        "<td>$subUnsur</td>".
-        "<td>$kegiatan</td>".
-        "<td>$ak</td></tr>";
+if(isset($this->kegiatan)){
+    foreach ($this->kegiatan as $k ) {
+        // echo $k->getIdJenjangJabatanFungsional()->getNama() ."<br/>";
+        // echo $k->getIdSubUnsur()->getIdUnsur()->getNama() ."<br/>";
+        // echo $k->getIdSubUnsur()->getNama() ."<br/>";
+        // echo $k->getKegiatan() ."<br/>";
+        $jenjang = $k->getIdJenjangJabatanFungsional()->getNama();
+        $unsur = $k->getIdSubUnsur()->getIdUnsur()->getNama();
+        $subUnsur =    $k->getIdSubUnsur()->getNama();
+         $kegiatan = $k->getKegiatan();
+         $ak = $k->getAngkaKredit()?$k->getAngkaKredit():0 ;
+         $kode = $k->getKode();
+     
+         
+     
+        $text = '['.$jenjang. '] Unsur: '. $unsur.' '.$subUnsur.' '.$kegiatan;
+        $value = $k->getId();
+        $optionsButirKegiatan .= "<option value='$value'>$text</option>";
+     
+        $tr .= "<tr>".
+             "<td>$jenjang</td>". 
+             "<td>$kode</td>". 
+             "<td>$unsur</td>".
+             "<td>$subUnsur</td>".
+             "<td>$kegiatan</td>".
+             "<td>$ak</td></tr>";
+     }
 }
 
+
 function toDataTable($tr){
-    $datatable = "<table class='Datatable table display' id='dtButirKegiatan'>
+    $datatable = "<table class='Datatable table display' id='dtFormasi'>
     <thead>
     <tr>
+        <th>Unit Kerja</th>
         <th>Jenjang</th>
-        <th>kode</th>
-        <th>Unsur</th>
-        <th>Sub Unsur</th>
-        <th>Butir Kegiatan</th>
-        <th>Angka Kredit</th>
+        <th>Formasi</th>
+        <th>Bezetting</th>
     </tr>
     </thead>
     <tbody>
@@ -54,45 +55,7 @@ function toDataTable($tr){
 <div class=" col-12">
 <div class="card card-primary">
     <div class="card-header">
-    <h3 class="card-title">Formulir Periode Kegiatan Jabatan Fungsional</h3>
-    </div>
-    <!-- /.card-header -->
-    <!-- form start -->
-    
-    <div class="card-body">
-        
-        <div class="row">
-              
-              <div class="col-12">
-                <div class="form-group select2-purple">
-                  <label>Multiple</label>
-                  <select class="select2" multiple="multiple" data-dropdown-css-class="select2-purple"  data-placeholder="Pilih Kegiatan" style="width: 100%;">
-                    <?=$optionsButirKegiatan;?>
-                  </select>
-                </div>
-                <!-- /.form-group -->
-              </div>
-              <!-- /.col -->
-            </div>
-            <!-- /.row -->
-        
-    </div>
-    <!-- /.card-body -->
-
-    <div class="card-footer">
-        <button type="submit" class="btn btn-primary float-right">Simpan Periode Dupak</button>
-    </div>
-
-</div>
-<!-- /.card -->
-</div>
-</div>
-
-<div class="row">
-<div class=" col-12">
-<div class="card card-primary">
-    <div class="card-header">
-    <h3 class="card-title">Daftar Kegiatan</h3>
+    <h3 class="card-title">Daftar Formasi</h3>
     </div>
     <!-- /.card-header -->
     <!-- form start -->
@@ -129,7 +92,7 @@ echo <<<JS
         //location.href = $(this).val();
     });
 
-    $("#dtButirKegiatan").DataTable({
+    $("#dtFormasi").DataTable({
       "responsive": true,
       "autoWidth": false,
     });
