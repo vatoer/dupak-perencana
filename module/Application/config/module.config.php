@@ -17,7 +17,6 @@ use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 
-
 return [
     'router' => [
         'routes' => [
